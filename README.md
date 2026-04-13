@@ -97,6 +97,42 @@ python deploy_mujoco/deploy_mujoco.py
 
 ---
 ## 3. Operation Instructions in Simulation
+
+### 3.1 Control Mappings
+
+#### Keyboard Controls
+| Key / Combination | Function |
+|-------------------|----------|
+| `ESC` | Exit program |
+| `P` | PassiveMode (damping protection) |
+| `SPACE` | FixedPose (position control reset) |
+| `Shift + 1` or `Numpad 1` | LocoMode (stable walking) |
+| `Shift + 2` or `Numpad 2` | Dance (Charleston) |
+| `Shift + 3` or `Numpad 3` | KungFu (martial arts) |
+| `Shift + 4` or `Numpad 4` | Kick movement |
+| `Shift + 5` or `Numpad 5` | KungFu2 (failed martial arts) |
+| `Shift + W / S` | Move forward / backward |
+| `Shift + A / D` | Move left / right |
+| `Shift + Q / E` | Rotate left / right |
+| `↑ / ↓ / ← / →` | Move (alternative to WASD) |
+
+> **Note**: Keyboard input for velocity commands will override joystick input when active.
+
+#### Xbox Controller (Joystick) Controls
+| Button / Combination | Function |
+|----------------------|----------|
+| `SELECT` | Exit program |
+| `L3` | PassiveMode (damping protection) |
+| `START` | FixedPose (position control reset) |
+| `R1 + A` | LocoMode (stable walking) |
+| `R1 + X` | Dance (Charleston) |
+| `R1 + Y` | KungFu (martial arts) — simulation only |
+| `L1 + Y` | KungFu2 (failed martial arts) — simulation only |
+| `R1 + B` | Kick movement — simulation only |
+| `Left Stick` | Control movement direction (forward/back/left/right) |
+| `Right Stick (horizontal)` | Control rotation (yaw) |
+
+### 3.2 Simulation Steps
 1. Connect an Xbox controller.
 2. Run the simulation program:
 ```bash
