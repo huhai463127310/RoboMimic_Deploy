@@ -21,7 +21,7 @@ class FSMMode(Enum):
     NORMAL = 2
 
 class FSM:
-    def __init__(self, state_cmd:StateAndCmd, policy_output:PolicyOutput):
+    def __init__(self, state_cmd:StateAndCmd, policy_output:PolicyOutput, use_ue_config=False):
         self.state_cmd = state_cmd
         self.policy_output = policy_output
         self.cur_policy : FSMState
@@ -30,7 +30,7 @@ class FSM:
         self.FSMmode = FSMMode.NORMAL
         
         self.passive_mode = PassiveMode(state_cmd, policy_output)
-        self.fixed_pose_1 = FixedPose(state_cmd, policy_output)
+        self.fixed_pose_1 = FixedPose(state_cmd, policy_output, use_ue_config)
         self.loco_policy = LocoMode(state_cmd, policy_output)
         self.kungfu_policy = KungFu(state_cmd, policy_output)
         self.dance_policy = Dance(state_cmd, policy_output)

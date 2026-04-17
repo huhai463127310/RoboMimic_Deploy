@@ -186,13 +186,25 @@ def pd_control(target_q, q, kp, target_dq, dq, kd):
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="RoboMimic MuJoCo Deploy")
+    parser.add_argument("--robot-xml", type=str, default=None, help="机器人XML路径（相对于PROJECT_ROOT），例如g1_description/scene.xml或g1_description_bridge/g1_29dof_rev_1_0_position.xml。不指定则使用mujoco.yaml中的xml_path")
+    args = parser.parse_args()
+    
     current_dir = os.path.dirname(os.path.abspath(__file__))
     mujoco_yaml_path = os.path.join(current_dir, "config", "mujoco.yaml")
     with open(mujoco_yaml_path, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
-        xml_path = os.path.join(PROJECT_ROOT, config["xml_path"])
         simulation_dt = config["simulation_dt"]
         control_decimation = config["control_decimation"]
+    
+    # 根据参数决定使用哪个XML
+    if args.robot_xml:
+        xml_path = os.path.join(PROJECT_ROOT, args.robot_xml)
+        print(f"[MuJoCo] Using robot XML from args: {xml_path}")
+    else:
+        xml_path = os.path.join(PROJECT_ROOT, config["xml_path"])
+        print(f"[MuJoCo] Using robot XML from config: {xml_path}")
         
     m = mujoco.MjModel.from_xml_path(xml_path)
     d = mujoco.MjData(m)

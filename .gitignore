@@ -83,3 +83,9 @@ Desktop.ini
 *.log
 *.sqlite
 *.db
+
+# ==============================
+# 导入UE URLab转换的3D模型文件
+# ==============================
+*.glb
+g1_description_bridge/

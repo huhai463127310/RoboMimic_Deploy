@@ -8,7 +8,7 @@ from common.utils import FSMCommand
 import os
 
 class FixedPose(FSMState):
-    def __init__(self, state_cmd:StateAndCmd, policy_output:PolicyOutput):
+    def __init__(self, state_cmd:StateAndCmd, policy_output:PolicyOutput, use_ue_config=False):
         super().__init__()
         self.state_cmd = state_cmd
         self.policy_output = policy_output
@@ -18,7 +18,12 @@ class FixedPose(FSMState):
         self.cur_step = 0
         
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        config_path = os.path.join(current_dir, "config", "FixedPose.yaml")
+        if use_ue_config:
+            config_path = os.path.join(current_dir, "config", "FixedPose_bridge.yaml")
+            print("[FixedPose] Using UE config (FixedPose_bridge.yaml)")
+        else:
+            config_path = os.path.join(current_dir, "config", "FixedPose.yaml")
+            print("[FixedPose] Using MuJoCo config (FixedPose.yaml)")
         with open(config_path, "r") as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
             self.kds = np.array(config["kds"], dtype=np.float32)
